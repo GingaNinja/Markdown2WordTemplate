@@ -1,0 +1,228 @@
+# Release pack
+
+# Title page
+
+author: Dave Arkell
+project: NLA Compliance Reporting
+system_area: Monitoring
+
+version_history:
+  - author: Dave Arkell
+    description: Initial version
+    version: 1
+    date: 26/09/2013
+
+# Overview
+
+release_overview: |+
+  The NLA Reporting project is an interim solution for meeting the NLA Report changes by 1st October 2013. This
+  solution is a refreshable Excel spreadsheet that conforms to the latest NLA template.
+
+  \\
+  The new NLA template consists of two new columns:
+
+
+  * **Copy type** - This determines the way of delivery mapped to the way the article arrived. This speeds up the reporting
+   process as there are less Excel tabs to fill in.
+  * **Org Id** - This is the NLA organisation id.
+
+  \\
+  The changes are mostly modifications to views in both the prod and dmm_live schema.
+
+technical_overview: |
+  Below lists the views that have been modified:
+
+  * vNlaReportElecAll
+  * vNlaReportElecSummary
+  * vNlaReportDstr
+  *	vNlaReportFtpInt
+  *	vNlaReportFtpNat
+  *	vNlaReportFtpReg
+  *	vNlaReportFtpSpe
+  *	vNlaReportFtpWeb
+  *	vNlaReportFtpAll
+  *	vNlaReportPrintNat
+  *	vNlaReportPrintInt
+  *	vNlaReportPrintReg
+  *	vNlaReportPrintSpe
+  *	vNlaReportPrintWeb
+  *	vNlaReportFax
+  *	vNlaReportPrintAll
+  *	vDstrQueue
+
+  \\
+  The Cision XML template in TDstrLayoutInfo has also been modified to include copy type and org id.
+
+
+
+release_pack_contents:
+  - name: Release.docx
+    type: Document
+    version: 1.0
+    date: 24/09/2013
+    new_or_replace: New
+
+# Installation requirements
+# NOTE: Only list things that have changed for this release
+
+application_areas_affected: Licence Agreement Report Generator Interim NLA Report (Excel)
+software_dependencies: n/a
+hardware_dependencies: n/a
+required_permissions: n/a
+database_dependencies: n/a
+other_environment_requirements: n/a
+
+# Installation details
+
+installation_steps: |
+  ### Sql Rollout
+
+  \\
+  Go to the TeamCity [artifacts page](http://vmd-ci01.durrants.dev:8090/viewLog.html?buildId=1898&buildTypeId=bt12&tab=artifacts) for the nlaReports build.
+
+  \\
+  (If you are prompted to logon, then click 'Login using NT domain account')
+
+  \\
+  You will notice that a file named 'scripts.zip' will exist. Download this and copy its content to an appropriate
+  machine.\\
+  \\
+  **UAT**\\
+  \\
+  Then run this - Rollout-UAT.bat
+
+  The machine will need access to **UATRAC01**
+
+  \\
+  **LIVE**\\
+  \\
+  Then run this - Rollout-LIVE.bat
+
+  The machine will need access to **RAC-SCANIP.durrants.co.uk**
+
+  ### NLA Report Setup
+
+  \\
+  Download the NLA interim spreadsheet from the
+  TeamCity [artifacts page](http://vmd-ci01.durrants.dev:8090/viewLog.html?buildId=1898&buildTypeId=bt12&tab=artifacts).
+
+  \\
+  Open the NLA interim spreadsheet.
+
+  \\
+  Select the 'Print Data' tab:
+
+  \\
+  ![printdata](release_pack/image2.jpeg)
+
+  \\
+  Then select 'Properties':
+
+  \\
+  ![Data Properties](release_pack/image3.jpeg)
+
+  \\
+  You will be presented with which connection this worksheet is currently using. Select the Properties button on the
+  right:
+
+  \\
+  ![Properties button](release_pack/image4.jpeg)
+
+  \\
+  Ensure that the connection string appears as below:
+
+  \\
+  **UAT**\\
+  \\
+  ![UAT Connection string](release_pack/image5.jpeg)
+
+  \\
+  **Live**\\
+  \\
+  ![Live Connection string](release_pack/image6.jpeg)
+
+
+rollback_steps: |
+  If you haven't already downloaded the scripts then you will need to go to: the
+  [artifacts page](http://vmd-ci01.durrants.dev:8090/viewLog.html?buildId=1898&buildTypeId=bt12&tab=artifacts).
+
+  \\
+  (If you are prompted to logon then click 'Login using NT domain account')
+
+  \\
+  You will notice that a file named 'scripts.zip' will exist. Download this and copy its content to an appropriate
+  machine.
+
+  \\
+  **UAT**\\
+  \\
+  Then run this - **Rollback-UAT.bat**\\
+  The machine will need access to **UATRAC01**.
+
+  \\
+  **LIVE**\\
+  \\
+  Then run this - **Rolback-LIVE.bat**\\
+  The machine will need access to **RAC-SCANIP.durrants.co.uk**.
+
+
+# NOTE: only list high/medium risks – should also list any business
+# implications e.g. training required, affects email formats etc
+
+risk_matrix:
+  - risk:
+    probability:
+    impact:
+    mitigation:
+
+uat_sign_off:
+  - team: QA
+    affected: n/a
+    who: Hazel Lee
+    status: Pending
+    comments: n/a
+
+emails_rollout_initiation: |
+  [it@durrants.co.uk](mailto:it@durrants.co.uk)\\
+  IT change notifications\\
+  [Daoud.Clarke@gorkana.com](mailto:Daoud.Clarke@gorkana.com)\\
+  [David.Arkell@gorkana.com](mailto:David.Arkell@gorkana.com)\\
+  [Lee.Walton@gorkana.com](mailto:Lee.Walton@gorkana.com)\\
+  [Hazel.Lee@gorkana.com](mailto:Hazel.Lee@gorkana.com)\\
+  [Natasha.Stephens@gorkana.com](mailto:Natasha.Stephens@gorkana.com)
+
+
+emails_rollout_successful: |
+  [it@durrants.co.uk](mailto:it@durrants.co.uk)\\
+  IT change notifications\\
+  [Daoud.Clarke@gorkana.com](mailto:Daoud.Clarke@gorkana.com)\\
+  [David.Arkell@gorkana.com](mailto:David.Arkell@gorkana.com)\\
+  [Lee.Walton@gorkana.com](mailto:Lee.Walton@gorkana.com)\\
+  [Hazel.Lee@gorkana.com](mailto:Hazel.Lee@gorkana.com)\\
+  [Natasha.Stephens@gorkana.com](mailto:Natasha.Stephens@gorkana.com)
+
+external_communication_plan: n/a
+user_offline_time: n/a
+training_plan: n/a
+
+contacts:
+  - team: IT Ops
+    name: General
+    email: |
+      [itops@durrants.co.uk](mailto:itops@durrants.co.uk)
+    comments:
+  - team: Development
+    name: |
+      Natasha Stephens\\
+      Daoud Clarke\\
+      David Arkell\\
+      Lee Walton
+    email: |
+      [Natasha.Stephens@gorkana.com](mailto:Natasha.Stephens@gorkana.com)\\
+      [Daoud.Clarke@gorkana.com](mailto:Daoud.Clarke@gorkana.com)\\
+      [David.Arkell@gorkana.com](mailto:David.Arkell@gorkana.com)\\
+      [Lee.Walton@gorkana.com](mailto:Lee.Walton@gorkana.com)
+    comments:
+
+post_release_checks: Check that the views modified have successfully changed
+release_test_plan: Hazel will run both the original report and the new interim rpeort and will compare the values.
